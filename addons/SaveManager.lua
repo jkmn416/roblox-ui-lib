@@ -204,11 +204,9 @@ local SaveManager = {} do
 		local section = tab:AddLeftGroupbox('config')
 
 		section:AddInput('SaveManager_ConfigName',    { Text = 'name' })
-		section:AddDropdown('SaveManager_ConfigList', { Text = 'list', Values = self:RefreshConfigList(), AllowNull = true })
+		section:AddDropdown('SaveManager_ConfigList', { Values = self:RefreshConfigList(), AllowNull = true })
 
-		section:AddDivider()
-
-		section:AddButton('Create config', function()
+		section:AddButton('create', function()
 			local name = Options.SaveManager_ConfigName.Value
 
 			if name:gsub(' ', '') == '' then 
@@ -251,7 +249,7 @@ local SaveManager = {} do
 			Options.SaveManager_ConfigList:SetValue(nil)
 		end)
 
-		section:AddButton('Set as autoload', function()
+		section:AddButton('set autoload', function()
 			local name = Options.SaveManager_ConfigList.Value
 			writefile(self.Folder .. '/settings/autoload.txt', name)
 			SaveManager.AutoloadLabel:SetText('autoload: ' .. name)
